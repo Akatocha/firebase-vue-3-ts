@@ -10,6 +10,14 @@ import { Options, Vue } from 'vue-class-component';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 @Options({
+  data() {
+    return {
+      key: {
+        name: 'bob',
+        age: 25
+      }
+    }
+  },
   components: {
     HelloWorld,
   },
