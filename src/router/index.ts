@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 
+import { getUserState } from '@/helpers/User';
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -27,9 +29,19 @@ const routes: Array<RouteRecordRaw> = [
   }
 ]
 
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach(async (to, from, next) => {
+  const userIsLogged = await getUserState();
+  if (!userIsLogged && to.name === 'About') {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router
