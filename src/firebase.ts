@@ -46,7 +46,7 @@ function getUserOnChange(userId: number): void {
   // update value as websocket
   onValue(rawData, snapshot => {
     const data = snapshot.val();
-    // update Value function
+    // update Value function when DB is update
   });
 }
 
@@ -73,4 +73,5 @@ async function test() {
   console.log(user);
 }
 
+// test for user writing in DB
 test();
