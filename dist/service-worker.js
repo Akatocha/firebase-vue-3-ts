@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a317d1161cbc2c5c9a3944cdd8fd377e.js"
+  "/precache-manifest.b7ad11c5a849fc36ffcfcbf58972d13a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "firebase-vue"});
