@@ -36,8 +36,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const userIsLogged = await getUserState();
-  console.log('to', to);
-
   if (!userIsLogged && to.meta.auth) {
     next('/login');
   } else {
