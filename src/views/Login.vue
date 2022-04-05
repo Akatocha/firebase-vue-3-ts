@@ -23,7 +23,7 @@
 import { reactive, ref } from 'vue';
 import { getUserState } from '@/helpers/User';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import type { FormInstance } from 'element-plus';
+import type { FormInstance, FormRules } from 'element-plus';
 
 const LoginForm = ref<FormInstance>();
 const form = reactive({
@@ -31,9 +31,16 @@ const form = reactive({
   password: '',
   phone: '',
 });
-const rules = reactive({
-  email: [{ required: true, min: 3, message: 'Please input email', trigger: 'blur' }],
-  password: [{ required: true, message: 'Please input password', trigger: 'blur' }],
+const rules: FormRules = reactive({
+  email: [
+    { required: true, min: 3, message: 'Please input email', trigger: 'blur' },
+    {
+      type: 'email',
+      message: 'Please input correct email address',
+      trigger: ['blur', 'change'],
+    },
+  ],
+  password: [{ required: true, min: 6, message: 'Please input password', trigger: 'blur' }],
   phone: [{ required: true, message: 'Please input phone', trigger: 'blur' }],
 });
 const cancel = () => {
