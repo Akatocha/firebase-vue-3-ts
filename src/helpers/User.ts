@@ -5,7 +5,6 @@ export const getUserState = () => {
     onAuthStateChanged(getAuth(), user => {
       res(Boolean(user))
     });
-
   })
 };
 

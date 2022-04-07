@@ -4,9 +4,6 @@
       <el-form-item prop="email">
         <el-input v-model="form.email" type="email" placeholder="Please input email" clearable />
       </el-form-item>
-      <el-form-item prop="phone">
-        <el-input v-model="form.phone" type="text" placeholder="Please input phone" clearable />
-      </el-form-item>
       <el-form-item prop="password">
         <el-input v-model="form.password" type="password" placeholder="Please input password" show-password />
       </el-form-item>
@@ -29,7 +26,6 @@ const LoginForm = ref<FormInstance>();
 const form = reactive({
   email: '',
   password: '',
-  phone: '',
 });
 const rules: FormRules = reactive({
   email: [
@@ -37,7 +33,7 @@ const rules: FormRules = reactive({
     {
       type: 'email',
       message: 'Please input correct email address',
-      trigger: ['blur', 'change'],
+      trigger: 'blur'
     },
   ],
   password: [{ required: true, min: 6, message: 'Please input password', trigger: 'blur' }],
@@ -46,7 +42,6 @@ const rules: FormRules = reactive({
 const cancel = () => {
   form.email = '';
   form.password = '';
-  form.phone = '';
 };
 const logout = async () => {
   console.log('log');

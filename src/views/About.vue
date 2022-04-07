@@ -5,3 +5,9 @@
     <h3>Auto deploy test without build script test 3</h3>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({});
+</script>

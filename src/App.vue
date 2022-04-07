@@ -1,12 +1,31 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/registration">Registration</router-link> | 
+    <router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> | <router-link to="/registration">Registration</router-link> |
     <router-link to="/login">Login</router-link>
   </div>
-  <router-view/>
+  <router-view />
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { mapActions, mapGetters } from 'vuex';
+
+export default defineComponent({
+  mounted() {
+    this.getUser();
+  },
+  computed: {
+    ...mapGetters(['GET_USER', 'GET_USER_STATE']),
+  },
+  methods: {
+    ...mapActions(['GetUser']),
+    async getUser() {
+      await this.GetUser();
+      //more logic
+    },
+  },
+});
+</script>
 
 <style lang="scss">
 #app {
