@@ -1,9 +1,12 @@
+import { db } from '@/firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onValue, ref } from 'firebase/database';
 import { Module } from 'vuex';
 
 const User: Module<any, any> = {
   state: {
     user: null,
+    userData: null,
   },
   getters: {
     GET_USER: state => {
@@ -15,21 +18,35 @@ const User: Module<any, any> = {
     GET_USER_STATE: state => {
       return Boolean(state.user);
     },
+    GET_USER_DATA: state => {
+      return state.userData;
+    },
   },
   mutations: {
     GetUser(state, payload) {
       state.user = payload;
     },
+    GetUserData(state, payload) {
+      state.userData = payload;
+    },
   },
   actions: {
     async GetUser({ commit }) {
       onAuthStateChanged(getAuth(), user => {
-        if(!user) {
-          commit('GetUser', null)
+        if (!user) {
+          commit('GetUser', null);
         } else {
           commit('GetUser', user);
+          const rawData = ref(db, 'users/' + user.uid);
+          // update value as websocket
+
+          onValue(rawData, snapshot => {
+            const data = snapshot.val();
+            // update Value function when DB is update
+            commit('GetUserData', data);
+          });
         }
-      })
+      });
     },
   },
 };

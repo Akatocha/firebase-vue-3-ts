@@ -1,7 +1,20 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> | <router-link to="/registration">Registration</router-link> |
-    <router-link to="/login">Login</router-link>
+    <span>
+      <router-link :to="{name: 'Home'}">Home</router-link> | 
+    </span>
+    <span v-if="GET_USER_STATE">
+      <router-link :to="{name: 'Cabinet'}">Cabinet</router-link> | 
+    </span>
+    <span v-if="GET_USER_STATE">
+      <router-link :to="{name: 'AddProduct'}">Add new product</router-link> | 
+    </span>
+    <span>
+      <router-link :to="{name: 'Registration'}">Registration</router-link> | 
+    </span>
+    <span>
+      <router-link :to="{name: 'Login'}">Login</router-link>
+    </span>
   </div>
   <router-view />
 </template>
@@ -11,19 +24,19 @@ import { defineComponent } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 
 export default defineComponent({
-  mounted() {
-    this.getUser();
-  },
-  computed: {
-    ...mapGetters(['GET_USER', 'GET_USER_STATE']),
-  },
-  methods: {
-    ...mapActions(['GetUser']),
-    async getUser() {
-      await this.GetUser();
-      //more logic
+    mounted() {
+        this.getUser();
     },
-  },
+    computed: {
+        ...mapGetters(["GET_USER", "GET_USER_STATE"]),
+    },
+    methods: {
+        ...mapActions(["GetUser"]),
+        async getUser() {
+            await this.GetUser();
+            //more logic
+        },
+    },
 });
 </script>
 

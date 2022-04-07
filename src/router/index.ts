@@ -19,9 +19,18 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/Login.vue'),
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue'),
+    path: '/cabinet',
+    name: 'Cabinet',
+    component: () => import('../views/Cabinet.vue'),
+    meta: {
+      // Only auth user
+      auth: true,
+    },
+  },
+  {
+    path: '/add-product',
+    name: 'AddProduct',
+    component: () => import('../views/AddProduct.vue'),
     meta: {
       // Only auth user
       auth: true,

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="registration__form-box">
     <el-form :model="form" :rules="rules" ref="registrationForm">
       <el-form-item prop="email">
         <el-input v-model="form.email" type="email" placeholder="Please input email" clearable />
@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit(registrationForm)">Registration</el-button>
-        <el-button @click="cancel">Cancel</el-button>
+        <el-button @click="cancel(registrationForm)">Cancel</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -49,10 +49,14 @@ const rules: FormRules = reactive({
   checkPassword: [{ trigger: 'blur', validator: checkPasswordValidator }],
   phone: [{ required: true, message: 'Please input phone', trigger: 'blur' }],
 });
-const cancel = () => {
+const cancel = (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
   form.email = '';
   form.password = '';
   form.phone = '';
+  form.checkPassword = ''
+  formEl.clearValidate()
+
 };
 const onSubmit = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
@@ -111,4 +115,11 @@ const tryRegistration = async () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.registration {
+  &__form-box {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+</style>
